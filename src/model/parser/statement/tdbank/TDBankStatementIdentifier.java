@@ -1,4 +1,6 @@
-package model.parser.statement;
+package model.parser.statement.tdbank;
+
+import model.parser.statement.StatementTypeIdentifier;
 
 /**
  * Identifies a TD Bank statement.

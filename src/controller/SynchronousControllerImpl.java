@@ -9,8 +9,10 @@ import java.util.Map;
 import model.parser.pdf.PDFParser;
 import model.parser.statement.StatementParser;
 import model.parser.statement.StatementTypeIdentifier;
-import model.parser.statement.TDBankStatementIdentifier;
-import model.parser.statement.TDBankStatementParser;
+import model.parser.statement.discover.DiscoverStatementIdentifier;
+import model.parser.statement.discover.DiscoverStatementParser;
+import model.parser.statement.tdbank.TDBankStatementIdentifier;
+import model.parser.statement.tdbank.TDBankStatementParser;
 import model.transactions.AbstractTransaction;
 import model.transactions.Deposit;
 import model.transactions.Payment;
@@ -37,6 +39,7 @@ public class SynchronousControllerImpl implements SynchronousController {
 
   private static final Map<StatementTypeIdentifier, StatementParser> STATEMENT_TYPES = new HashMap<>() {{
     put(new TDBankStatementIdentifier(), new TDBankStatementParser());
+    put(new DiscoverStatementIdentifier(), new DiscoverStatementParser());
   }};
 
   /**

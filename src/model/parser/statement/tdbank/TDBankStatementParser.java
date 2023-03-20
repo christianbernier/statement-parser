@@ -1,4 +1,4 @@
-package model.parser.statement;
+package model.parser.statement.tdbank;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import model.date.Date;
 import model.date.Month;
 import model.money.MoneyAmount;
+import model.parser.statement.StatementParser;
 import model.transactions.AbstractTransaction;
 import model.transactions.AbstractTransactionFactory;
 import model.transactions.Deposit;
