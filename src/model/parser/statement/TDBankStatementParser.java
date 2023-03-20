@@ -27,6 +27,11 @@ public class TDBankStatementParser implements StatementParser {
 
   private static final Pattern DATE_RANGE_PATTERN = Pattern.compile("Statement Period: (\\w{3} \\d{1,2} \\d{4})-(\\w{3} \\d{1,2} \\d{4})");
   private static final Pattern TRANSACTION_PATTERN = Pattern.compile("(\\d{2})/(\\d{2}) (.*) (\\d{0,3},?\\d{0,3},?\\d{1,3})\\.(\\d{2})");
+  private static final String[] BANNED_PATTERNS = {
+    ".* DDA PUR",
+    "\\*+\\d+",
+    "\\* \\w{2}",
+  };
 
   /**
    * Initializes a new {@code TDBankStatementParser} instance.
@@ -110,6 +115,10 @@ public class TDBankStatementParser implements StatementParser {
       Date date = Date.withinRange(this.startDate, this.endDate, month, day);
 
       String description = transactionMatcher.group(3).replace(",", " ");
+      for (String bannedPattern : BANNED_PATTERNS) {
+        description = description.replaceAll(bannedPattern, "");
+      }
+      description = description.trim();
 
       int dollars = Integer.parseInt(transactionMatcher.group(4).replaceAll(",", ""));
       int cents = Integer.parseInt(transactionMatcher.group(5));
